@@ -3,7 +3,14 @@ import traceback
 from io import StringIO
 from contextlib import redirect_stdout, redirect_stderr
 
-eval_helper = {}
+eval_helper = {
+    "result":None,
+    "code":None,
+    "chat_id":None,
+    'message_id':None,
+    'sent_id':None,
+    "paste_id":None,
+}
 
 async def aexec(code: str, client, msg):
     local_vars = {

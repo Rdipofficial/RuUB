@@ -25,8 +25,7 @@ async def inline_eval(c: Client, q: InlineQuery):
         paste_id, link = await paste(
             content=text,
             title="Eval output",
-            fmt="text",
-            time="10M"
+            fmt="text"
         )
         eval_helper["paste_id"] = paste_id
         buttons.append(
@@ -60,11 +59,13 @@ async def delete_eval(c: Client, q: CallbackQuery):
     if paste_id:
         await delete_paste(paste_id)
 
-
     from ronova import ub
-    await ub.delete_messages(
+    try:
+        await ub.delete_messages(
             chat_id=eval_helper['chat_id'],
-            message_ids=[eval_helper['message_id'],eval_helper['sent_id']]
+            message_ids=[eval_helper['message_id'], eval_helper['sent_id']]
         )
+    except Exception as e:
+        print(f"Delete failed: {e}")
 
     eval_helper.clear()
