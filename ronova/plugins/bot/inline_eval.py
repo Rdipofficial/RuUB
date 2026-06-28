@@ -39,8 +39,8 @@ async def inline_eval(c: Client, q: InlineQuery):
             InlineQueryResultArticle(
                 title="Eval Output",
                 input_message_content=InputTextMessageContent(
-                    f"<b>Code:</b>\n<blockquote>\n{code}</blockquote>\n\n"
-                    f"<b>Output:</b>\n<blockquote>{text}</blockquote>"
+                    f"**Code:**\n```python\n{code}```\n\n"
+                    f"**Output:**\n<blockquote>{text}</blockquote>"
                 ),
                 reply_markup=InlineKeyboardMarkup(buttons)
             )
