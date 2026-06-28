@@ -9,8 +9,9 @@ from pyrogram.types import (
     InlineKeyboardButton
 )
 from pyrogram.enums import ButtonStyle
+from config import ADMIN_ID
 
-@Client.on_inline_query(filters.regex("logs"))
+@Client.on_inline_query(filters.regex("logs") & filters.user(ADMIN_ID))
 async def inline_logs(c: Client, q: InlineQuery):
 
     if not os.path.exists("logs.txt"):

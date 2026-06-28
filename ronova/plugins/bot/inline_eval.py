@@ -9,8 +9,9 @@ from pyrogram.types import (
 from pyrogram.enums import ButtonStyle
 
 from ..utilities import paste, eval_helper, delete_paste
+from config import ADMIN_ID
 
-@Client.on_inline_query(filters.regex("eval"))
+@Client.on_inline_query(filters.regex("eval") & filters.user(ADMIN_ID))
 async def inline_eval(c: Client, q: InlineQuery):
     user_id = q.from_user.id
 

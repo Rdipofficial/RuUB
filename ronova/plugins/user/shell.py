@@ -6,7 +6,7 @@ import traceback
 from pyrogram import Client, filters
 from pyrogram.types import Message, ReplyParameters
 
-from config import ADMIN_ID, BOT
+from config import ADMIN_ID, BOT, PREFIXES
 from ..utilities import eval_helper
 
 _cwd = os.getcwd()
@@ -50,7 +50,7 @@ def is_dangerous(command: str) -> str | None:
     return None
 
 
-@Client.on_message(filters.command("bash", prefixes=None) & filters.user(ADMIN_ID))
+@Client.on_message(filters.command("bash", prefixes=PREFIXES) & filters.user(ADMIN_ID))
 async def cmd_bash(c: Client, m: Message):
     global _cwd
 
