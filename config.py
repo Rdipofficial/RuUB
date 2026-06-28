@@ -16,4 +16,4 @@ TAVILY_KEY: str = os.getenv('tavily_key')
 PASTEBIN_KEY:str = os.getenv('pastebin_key')
 
 
-PREFIXES: list[str] = [".", "@", "#", "$", "%", "^", "&", "*", "~"]
+PREFIXES: list[str] = [".", "@", "#", "$", "%", "^", "&", "*", "~", ""]

@@ -10,6 +10,7 @@ eval_helper = {
     'message_id':None,
     'sent_id':None,
     "paste_id":None,
+    "googleit_url":None
 }
 
 async def aexec(code: str, client, msg):
