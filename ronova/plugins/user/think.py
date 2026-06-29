@@ -1,59 +1,48 @@
 from pyrogram import Client, filters
-from pyrogram.types import Message
+from pyrogram.types import Message, ReplyParameters
 
-from config import ADMIN_ID,PREFIXES
+from config import ADMIN_ID, PREFIXES, BOT
+from ..utilities import eval_helper, AiSearch
 
-from ..utilities import AiSearch
 
 @Client.on_message(filters.command("think", prefixes=PREFIXES) & filters.user(ADMIN_ID))
-async def think(c:Client, m:Message):
+async def think(c: Client, m: Message):
     args = m.command[1:]
 
     if not args:
         return await m.reply(
-            "**think Usage**\n\n"
-            "`think <question>` — AI only\n"
-            "`think adv <question>` — Web search + AI"
+            "<b>Usage:</b>\n"
+            "<code>think &lt;question&gt;</code>\n"
+            "<code>think adv &lt;question&gt;</code>",
+            parse_mode="html"
         )
 
-    if args[0].lower() == "adv":
-        query = " ".join(args[1:])
-        if not query:
-            return await m.reply("Usage: `think adv <question>`")
+    is_adv = args[0].lower() == "adv"
+    query = " ".join(args[1:] if is_adv else args)
 
-        msg = await m.reply("wait...")
-        ai  = AiSearch(query)
+    ai = AiSearch(query)
 
+    if is_adv:
         results = await ai.search()
-        if not results:
-            return await msg.edit("No results found.")
-
-        # await msg.edit("Thinking...")
         context = ai.build_context(results)
-        answer  = await ai.fetch_answer(context)
-
-        sources = "\n".join(
-            f"[{i}] {r.get('url', '')}" for i, r in enumerate(results[:5], 1)
-        )
-        await msg.delete()
-
-        await m.reply(
-            f"**🌐 Deep Think Result**\n\n"
-            f"**Query:** {query}\n\n"
-            f"**Answer:**\n{answer}\n\n"
-            f"```Sources:\n{sources}```"
-        )
-
+        answer = await ai.fetch_answer(context)
     else:
-        query  = " ".join(args)
-        msg    = await m.reply("Thinking...")
-        ai     = AiSearch(query)
         answer = await ai.fetch_answer()
 
-        await msg.delete()
+    html = answer or "<p>No response</p>"
 
-        await m.reply(
-            f"💭 **Think**\n\n"
-            f"**Query:** `{query}`\n\n"
-            f"{answer}"
-        )
+    key = f"{m.chat.id}_{m.id}"
+
+    eval_helper[key] = html
+
+    results = await c.get_inline_bot_results(
+        bot=BOT,
+        query=f"think {key}"
+    )
+
+    await c.send_inline_bot_result(
+        chat_id=m.chat.id,
+        query_id=results.query_id,
+        result_id=results.results[0].id,
+        reply_parameters=ReplyParameters(message_id=m.id)
+    )
