@@ -4,3 +4,4 @@ test.py
 *.session
 *.session-journal
 logs.txt
+unknown_errors.txt
