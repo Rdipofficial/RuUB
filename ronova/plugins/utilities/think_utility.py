@@ -1,6 +1,7 @@
 import aiohttp
 
 from config import TAVILY_KEY
+from .ai import AllAI
 
 
 HTML_SYSTEM_PROMPT = """
@@ -39,6 +40,8 @@ You are a STRICT HTML formatter AI optimized for CLEAN, COMPACT, and VISUAL answ
 - Tables should be CLEAN and SMALL (2–5 rows preferred)
 - Always use <th> for headers
 - Avoid large tables
+- Avoid large outputs if by any case you are using long output use summary tag for it or else avoid it 
+- character length should be 600-700 max only try giving output under 400 character or lesser
 
 Example:
 <table>
@@ -134,25 +137,15 @@ class AiSearch:
 
     async def fetch_answer(self, context: str = "") -> str:
         try:
+            ai = AllAI()
+
             prompt = self.build_prompt(context)
 
-            payload = {
-                "prompt": prompt,
-                "network": True,
-                "stream": False,
-                "system": {
-                    "userId": "#/chat/1722576084617",
-                    "withoutContext": not bool(context),
-                },
-            }
+            ai.set_prompt(prompt)
 
-            async with aiohttp.ClientSession() as session:
-                async with session.post(
-                    "https://api.binjie.fun/api/generateStream",
-                    headers={"Content-Type": "application/json"},
-                    json=payload,
-                ) as response:
-                    return await response.text()
+            result = await ai.ask()
+
+            return result or "<p>No response generated.</p>"
 
         except Exception as e:
             return f"<p>Error: {e}</p>"

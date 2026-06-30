@@ -1,6 +1,7 @@
 git+https://github.com/KurimuzonAkuma/kurigram.git
 tgcrypto
 uvloop
-
-python-dotenv
 aiohttp
+python-dotenv
+openai
+google-genai
