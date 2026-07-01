@@ -10,8 +10,9 @@ from ..utilities import eval_helper
 @Client.on_message(filters.command("stats", prefixes=PREFIXES) & filters.user(ADMIN_ID))
 async def stats_message(c: Client, m: Message):
     start = time.perf_counter()
-    await m.reply("wait...")
+    x = await m.reply("wait...")
     latency = round((time.perf_counter() - start) * 1000)
+    await x.delete()
 
     eval_helper['latency'] = latency
 
