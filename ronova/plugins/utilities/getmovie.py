@@ -3,13 +3,22 @@ import aiohttp
 from config import TMDB_KEY
 
 API_KEY = TMDB_KEY
-
 BASE_URL = "https://api.themoviedb.org/3"
 
-session = aiohttp.ClientSession()
+_session: aiohttp.ClientSession | None = None
 
-async def get_full_movie(query):
+
+async def get_session() -> aiohttp.ClientSession:
+    global _session
+    if _session is None or _session.closed:
+        _session = aiohttp.ClientSession()
+    return _session
+
+
+async def get_full_movie(query: str):
     try:
+        session = await get_session()
+
         async with session.get(
             f"{BASE_URL}/search/movie",
             params={"api_key": API_KEY, "query": query},
@@ -37,13 +46,13 @@ async def get_full_movie(query):
 
         title = data.get("title", "N/A")
         overview = data.get("overview", "No description available.")
-        genre = [g["name"] for g in data.get("genres", [])]
+        genres = [g["name"] for g in data.get("genres", [])]
 
         release = data.get("release_date", "N/A")
         rating = data.get("vote_average", 0)
         runtime = data.get("runtime", 0)
 
-        return (poster, banner, title, overview, genre, release, rating, runtime)
+        return (poster, banner, title, overview, genres, release, rating, runtime)
 
     except Exception as e:
         print("TMDB Error:", e)

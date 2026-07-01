@@ -1,47 +1,75 @@
 from pyrogram import Client, filters
 from pyrogram.types import (InputRichMessage, InlineQuery,
-                            InlineQueryResultArticle, InputRichMessageContent)
+                             InlineQueryResultArticle, InputRichMessageContent)
 
 from ..utilities import wiki_search
 
 
+def _escape(text: str) -> str:
+    if not text:
+        return ""
+    return (
+        text.replace("&", "&amp;")
+            .replace("<", "&lt;")
+            .replace(">", "&gt;")
+    )
+
+
 def build_rich_wiki_html(title, thumbnail, description, source_url, summary) -> str:
+    title = _escape(title)
+    description = _escape(description)
+    summary = _escape(summary)
 
-    return f"""
-<img src="{thumbnail}"/>
+    parts = []
 
-<h1>{title}</h1>
+    if thumbnail:
+        parts.append(f'<tg-slideshow><img src="{_escape(thumbnail)}"/></tg-slideshow>')
 
-<hr/>
+    parts.append(f"<h1>{title}</h1>")
+    parts.append("<hr/>")
 
-<details>
-<summary><b>📖 Summary</b></summary>
-<blockquote>{summary}</blockquote>
-</details>
+    if summary:
+        parts.append(
+            "<details open>"
+            "<summary><b>Summary</b></summary>"
+            f"<blockquote>{summary}</blockquote>"
+            "</details>"
+        )
+        parts.append("<hr/>")
 
-<hr/>
+    if description:
+        parts.append(
+            "<details>"
+            "<summary><b>Description</b></summary>"
+            f"<blockquote>{description}Wikipedia</blockquote>"
+            "</details>"
+        )
+        parts.append("<hr/>")
 
-<details open>
-<summary><b>📝 Description</b></summary>
-<blockquote>{description}<cite>Wikipedia</cite></blockquote>
-</details>
+    if source_url:
+        link = _escape(source_url)
+        parts.append(f'<p><a href="{link}">Read full article</a></p>')
 
-<hr/>
+    return "".join(parts)
 
-<p>
-🔗 <a href="{source_url}">Read full article</a>
-</p>
-"""
+
+def build_not_found_html(query: str) -> str:
+    return (
+        "<h2>Article not found</h2>"
+        f"<p>No Wikipedia summary could be located for \u201c{_escape(query)}\u201d.</p>"
+    )
+
 
 @Client.on_inline_query(filters.regex(r"wiki (.+)"))
 async def inline_wiki(c: Client, q: InlineQuery):
-    name      = q.matches[0].group(1)
-    result    = await wiki_search(name)
-    rich_text = build_rich_wiki_html(*result)
+    name = q.matches[0].group(1)
+    result = await wiki_search(name)
+
+    rich_text = build_rich_wiki_html(*result) if result else build_not_found_html(name)
 
     await q.answer([
         InlineQueryResultArticle(
-            title="send anime",
+            title=f"Wiki: {name}",
             input_message_content=InputRichMessageContent(
                 InputRichMessage(html=rich_text)
             )
