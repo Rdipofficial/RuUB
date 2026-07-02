@@ -12,18 +12,30 @@ def _escape(text: str) -> str:
         text.replace("&", "&amp;")
             .replace("<", "&lt;")
             .replace(">", "&gt;")
+
     )
+
+def fix_wiki_thumb(url: str, size: int = 330) -> str:
+    if not url:
+        return None
+
+    if "upload.wikimedia.org" in url:
+        import re
+        return re.sub(r"\d+px", f"{size}px", url)
+
+    return url
 
 
 def build_rich_wiki_html(title, thumbnail, description, source_url, summary) -> str:
     title = _escape(title)
     description = _escape(description)
     summary = _escape(summary)
+    thumbnail = _escape(thumbnail)
 
     parts = []
 
     if thumbnail:
-        parts.append(f'<tg-slideshow><img src="{_escape(thumbnail)}"/></tg-slideshow>')
+        parts.append(f'<tg-slideshow><img src="{fix_wiki_thumb(thumbnail)}"/></tg-slideshow>')
 
     parts.append(f"<h1>{title}</h1>")
     parts.append("<hr/>")

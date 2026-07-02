@@ -1,8 +1,9 @@
 from pyrogram import idle
 
+
 from ronova import ub, bot
 from .server import startServer
-import uvloop
+
 
 
 
