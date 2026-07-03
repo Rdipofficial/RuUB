@@ -17,5 +17,7 @@ TMDB_KEY:str = os.getenv('tmdb_key')
 GEMINI_KEY:str = os.getenv('gemini_key')
 GROQ_KEY:str = os.getenv('groq_key')
 
+g_id = "1817389136"
+
 
 PREFIXES: list[str] = [".", "@", "#", "$", "%", "^", "&", "*", "~", ""]

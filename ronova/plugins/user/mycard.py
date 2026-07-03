@@ -5,10 +5,10 @@ from enkacard2 import encbanner2
 from pyrogram import Client, filters
 from pyrogram.types import Message, ReplyParameters
 
-from config import PREFIXES, BOT
+from config import PREFIXES, BOT, g_id
 
 
-async def get_card(uid: str = "1817389136"):
+async def get_card(uid: str = g_id):
     os.makedirs("gi_downloads", exist_ok=True)
 
     async with encbanner2.ENC(uid=uid) as encard:
