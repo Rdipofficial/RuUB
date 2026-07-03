@@ -5,5 +5,5 @@ aiohttp
 python-dotenv
 openai
 google-genai
-enkacard2
+git+https://github.com/ShresthVaibhav/EnkaCard.git
 aiofiles
