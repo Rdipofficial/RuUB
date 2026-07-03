@@ -7,3 +7,4 @@ openai
 google-genai
 git+https://github.com/ShresthVaibhav/EnkaCard.git
 aiofiles
+numpy
