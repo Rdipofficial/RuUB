@@ -29,7 +29,7 @@ async def get_card():
         img.save(f"gi_downloads/{char.id}_{safe_name}.png", format="PNG", optimize=True)
 
 
-@Client.on_message(filters.command("mycard", prefixes=PREFIXES))
+@Client.on_message(filters.command("mycard", prefixes=PREFIXES) & filters.me)
 async def mygicard(c:Client, m:Message):
 
     msg = await m.reply("please wait...")
