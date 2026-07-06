@@ -1,5 +1,3 @@
-import aiohttp
-
 from config import TMDB_KEY
 from . import session
 
@@ -15,7 +13,6 @@ async def get_full_movie(query: str):
         async with session.get(
             f"{BASE_URL}/search/movie",
             params={"api_key": API_KEY, "query": query},
-            timeout=aiohttp.ClientTimeout(total=4)
         ) as search:
             search_data = await search.json()
 
@@ -27,7 +24,6 @@ async def get_full_movie(query: str):
         async with session.get(
             f"{BASE_URL}/movie/{movie['id']}",
             params={"api_key": API_KEY},
-            timeout=aiohttp.ClientTimeout(total=4)
         ) as details:
             data = await details.json()
 

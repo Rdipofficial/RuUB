@@ -1,4 +1,3 @@
-import aiohttp
 from . import session
 
 url = "https://graphql.anilist.co"

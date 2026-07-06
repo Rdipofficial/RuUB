@@ -1,4 +1,3 @@
-import aiohttp
 import random
 from google import genai
 from openai import OpenAI
