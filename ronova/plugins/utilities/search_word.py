@@ -4,14 +4,14 @@ async def word_search(word):
     url = f"https://api.dictionaryapi.dev/api/v2/entries/en/{word}"
 
     async with session.get(url) as resp:
-            data = await resp.json()
+        data = await resp.json()
 
-            if not isinstance(data, list):
-                return {"error": "Word not found"}
+        if not isinstance(data, list):
+            return {"error": "Word not found"}
 
-            base = data[0]
+        base = data[0]
 
-            result = {
+        result = {
                 "word": base.get("word"),
                 "phonetic": base.get("phonetic"),
                 "audio": None,
@@ -20,12 +20,12 @@ async def word_search(word):
                 "source": base.get("sourceUrls", [])
             }
 
-            for p in base.get("phonetics", []):
-                if p.get("audio"):
-                    result["audio"] = p["audio"]
-                    break
+        for p in base.get("phonetics", []):
+            if p.get("audio"):
+                result["audio"] = p["audio"]
+                break
 
-            for meaning in base.get("meanings", []):
+        for meaning in base.get("meanings", []):
                 m = {
                     "part_of_speech": meaning.get("partOfSpeech"),
                     "definitions": [],
@@ -41,4 +41,4 @@ async def word_search(word):
 
                 result["meanings"].append(m)
 
-            return result
+        return result

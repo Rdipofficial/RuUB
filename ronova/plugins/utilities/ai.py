@@ -63,11 +63,11 @@ class AllAI:
                 },
             }
             async with session.post(
-                    "https://api.binjie.fun/api/generateStream",
-                    headers={"Content-Type": "application/json"},
-                    json=payload,
-                ) as response:
-                    return await response.text()
+                "https://api.binjie.fun/api/generateStream",
+                headers={"Content-Type": "application/json"},
+                json=payload,
+            ) as response:
+                return await response.text()
 
         except Exception as e:
             return f"[Binjie Error] {e}"

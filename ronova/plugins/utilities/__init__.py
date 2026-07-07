@@ -5,7 +5,7 @@ from .getani import fetch_anime
 from .getmovie import get_full_movie
 from .getwiki import wiki_search
 from .search_word import word_search
-from .session import session
+from .http_session import session
 
 
 __all__ = ["paste",

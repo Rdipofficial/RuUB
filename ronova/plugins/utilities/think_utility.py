@@ -122,7 +122,7 @@ class AiSearch:
 
     async def search(self) -> list:
         try:
-                async with session.post(
+            async with session.post(
                     "https://api.tavily.com/search",
                     json={
                         "api_key": TAVILY_KEY,

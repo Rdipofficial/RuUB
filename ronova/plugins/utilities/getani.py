@@ -20,10 +20,10 @@ query ($search: String) {
 """
 
 async def fetch_anime(name):
-        async with session.post(url, json={
-            "query": query,
+    async with session.post(url, json={
+          "query": query,
             "variables": {"search": name}
-        }) as res:
+      }) as res:
             data        = await res.json()
             anime_data  = data['data']['Media']
 

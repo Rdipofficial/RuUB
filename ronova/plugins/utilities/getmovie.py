@@ -9,7 +9,6 @@ BASE_URL = "https://api.themoviedb.org/3"
 
 async def get_full_movie(query: str):
     try:
-
         async with session.get(
             f"{BASE_URL}/search/movie",
             params={"api_key": API_KEY, "query": query},
