@@ -1,4 +1,4 @@
-from . import session
+from ..utilities import session
 
 url = "https://graphql.anilist.co"
 

@@ -1,4 +1,4 @@
-from . import session
+from ..utilities import session
 
 async def wiki_search(query: str):
     url = f"https://en.wikipedia.org/api/rest_v1/page/summary/{query}"

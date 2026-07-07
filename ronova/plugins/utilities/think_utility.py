@@ -1,6 +1,6 @@
 from config import TAVILY_KEY
 from .ai import AllAI
-from . import session
+from ..utilities import session
 
 
 HTML_SYSTEM_PROMPT = """

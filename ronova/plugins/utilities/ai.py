@@ -3,7 +3,7 @@ from google import genai
 from openai import OpenAI
 
 from config import GEMINI_KEY, GROQ_KEY
-from . import session
+from ..utilities import session
 
 
 class AllAI:

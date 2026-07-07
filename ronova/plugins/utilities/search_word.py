@@ -1,4 +1,4 @@
-from . import session
+from ..utilities import session
 
 async def word_search(word):
     url = f"https://api.dictionaryapi.dev/api/v2/entries/en/{word}"
