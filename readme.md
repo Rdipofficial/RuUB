@@ -48,13 +48,13 @@ Set the following environment variables in your `.env` file:
 
 | Command | Description |
 |:---|:---|
-| `anisearch` | Search for anime |
+| `anisearch <name>` | Search for anime |
 | `del` | Delete a replied-to message |
 | `purge` | Delete all messages up to the replied-to message |
 | `eval <code>` | Evaluate code |
 | `googleit <text>` | A fun command |
 | `logs` | Get system logs |
-| `movie <text>` | Search for a movie |
+| `movie <name>` | Search for a movie |
 | `wrdsearch` | Search for a word |
 | `bash <code>` | Compile and run shell code |
 | `start` | Check if the bot is up |
