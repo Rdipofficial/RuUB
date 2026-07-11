@@ -2,11 +2,13 @@ import asyncio
 
 from pyrogram import Client, filters
 from pyrogram.types import Message, MessageOriginHiddenUser, MessageOriginUser
+
 from config import ADMIN_ID
+from ..filters import nobot
 
 BASE_DATA:dict = {}
 
-@Client.on_message(filters.private)
+@Client.on_message(filters.private & nobot())
 async def send_dm(c: Client, m: Message):
     await asyncio.sleep(0.2)
     if m.from_user.id != ADMIN_ID[0]:
