@@ -5,7 +5,7 @@ from config import ADMIN_ID, BOT, PREFIXES
 from ..utilities import get_output, eval_helper
 
 
-@Client.on_message(filters.command("e", prefixes=PREFIXES) & filters.user(ADMIN_ID))
+@Client.on_message(filters.command("e", prefixes=PREFIXES) & filters.user(ADMIN_ID), group= 2)
 async def cmd_exec_python(c:Client, m:Message):
 
     parts = m.text.split(None, 1)

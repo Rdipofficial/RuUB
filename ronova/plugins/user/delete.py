@@ -7,7 +7,7 @@ from config import ADMIN_ID, PREFIXES
 
 command_list: list[str]= ["del","purge"]
 
-@Client.on_message(filters.command(commands=command_list,prefixes=PREFIXES) & filters.user(ADMIN_ID))
+@Client.on_message(filters.command(commands=command_list,prefixes=PREFIXES) & filters.user(ADMIN_ID), group= 2)
 async def delete(c:Client, m:Message):
 
     command = m.command[0]

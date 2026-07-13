@@ -11,7 +11,7 @@ from ..shared import AFK_DATA
 from ..utilities import format_time, refresh_data, send, extract_media
 from ..filters import to_me
 
-@Client.on_message(filters.command(["afk", "brb"], prefixes=PREFIXES) & filters.user(ADMIN_ID))
+@Client.on_message(filters.command(["afk", "brb"], prefixes=PREFIXES) & filters.user(ADMIN_ID), group= 2)
 async def afk(c:Client, m:Message):
     if AFK_DATA.status:
         duration = format_time(int(time.time() - AFK_DATA.afk_time))
@@ -34,7 +34,7 @@ async def afk(c:Client, m:Message):
 
     await send(c, m, text)
 
-@Client.on_message(filters.me)
+@Client.on_message(filters.me, group= 1)
 async def rem_afk(c:Client, m:Message):
     if AFK_DATA.status:
         duration = format_time(int(time.time() - AFK_DATA.afk_time))
@@ -44,16 +44,24 @@ async def rem_afk(c:Client, m:Message):
     else:
         return
 
-@Client.on_message(to_me(ADMIN_ID[0]) & ~(filters.me & filters.bot))
+@Client.on_message(
+    (filters.private | filters.mentioned | to_me(ADMIN_ID[0]))
+    & ~filters.me
+    & ~filters.command(["afk", "brb"], prefixes=PREFIXES),
+    group=0
+)
 async def on_afk(c: Client, m: Message):
 
     if not AFK_DATA.status:
         return
-    
+
+    if not m.from_user:
+        return
+
     if m.from_user.id in AFK_DATA.users:
         return
-    else:
-        AFK_DATA.users.append(m.from_user.id)
+
+    AFK_DATA.users.append(m.from_user.id)
 
     duration = format_time(int(time.time() - AFK_DATA.afk_time))
     user = await c.get_users(ADMIN_ID[0])

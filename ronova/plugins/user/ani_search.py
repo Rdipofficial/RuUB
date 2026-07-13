@@ -4,7 +4,7 @@ from pyrogram.types import Message, ReplyParameters
 from config import PREFIXES, ADMIN_ID, BOT
 
 
-@Client.on_message(filters.command("anisearch", prefixes=PREFIXES) & filters.user(ADMIN_ID))
+@Client.on_message(filters.command("anisearch", prefixes=PREFIXES) & filters.user(ADMIN_ID), group= 2)
 async def get_ani(c: Client, m: Message):
     if len(m.command) < 2:
         await m.reply("Usage: <code>.anisearch &lt;anime name&gt;</code>")

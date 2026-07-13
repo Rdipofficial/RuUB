@@ -5,7 +5,7 @@ from config import PREFIXES, ADMIN_ID, BOT
 from ..utilities import eval_helper
 
 
-@Client.on_message(filters.command("googleit", prefixes=PREFIXES) & filters.user(ADMIN_ID))
+@Client.on_message(filters.command("googleit", prefixes=PREFIXES) & filters.user(ADMIN_ID), group= 2)
 async def googleit(c: Client, m: Message):
     parts = m.text.split(None, 1)
 

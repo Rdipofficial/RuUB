@@ -3,7 +3,7 @@ from pyrogram.types import Message, ReplyParameters
 
 from config import PREFIXES, ADMIN_ID, BOT
 
-@Client.on_message(filters.command("logs",prefixes=PREFIXES) & filters.user(ADMIN_ID))
+@Client.on_message(filters.command("logs",prefixes=PREFIXES) & filters.user(ADMIN_ID), group= 2)
 async def logs(c:Client, m:Message):
     
     results = await c.get_inline_bot_results(bot=BOT, query="logs")

@@ -50,7 +50,7 @@ def is_dangerous(command: str) -> str | None:
     return None
 
 
-@Client.on_message(filters.command("sh", prefixes=PREFIXES) & filters.user(ADMIN_ID))
+@Client.on_message(filters.command("sh", prefixes=PREFIXES) & filters.user(ADMIN_ID), group= 2)
 async def cmd_bash(c: Client, m: Message):
     global _cwd
 

@@ -4,7 +4,7 @@ from pyrogram.types import Message, ReplyParameters
 from config import PREFIXES, ADMIN_ID, BOT
 
 
-@Client.on_message(filters.command("wrdsearch", prefixes=PREFIXES) & filters.user(ADMIN_ID))
+@Client.on_message(filters.command("wrdsearch", prefixes=PREFIXES) & filters.user(ADMIN_ID), group= 2)
 async def get_word(c: Client, m: Message):
     if len(m.command) < 2:
         await m.reply("Usage: <code>.wrdsearch &lt;word&gt;</code>")

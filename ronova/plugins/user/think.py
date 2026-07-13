@@ -5,7 +5,7 @@ from config import ADMIN_ID, PREFIXES, BOT
 from ..utilities import eval_helper, AiSearch
 
 
-@Client.on_message(filters.command("think", prefixes=PREFIXES) & filters.user(ADMIN_ID))
+@Client.on_message(filters.command("think", prefixes=PREFIXES) & filters.user(ADMIN_ID), group= 2)
 async def think(c: Client, m: Message):
     args = m.command[1:]
 
