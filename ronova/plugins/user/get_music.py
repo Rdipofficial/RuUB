@@ -46,7 +46,7 @@ async def find_music(c: Client, m: Message):
         return
 
     if m.audio:
-        await asyncio.sleep(2)
+        await asyncio.sleep(3)
         await c.send_audio(MUSIC_STATE.user_chat_id, m.audio.file_id, reply_parameters=ReplyParameters(message_id=MUSIC_STATE.user_message_id))
         refresh_music_data()
 
@@ -55,6 +55,7 @@ async def find_music(c: Client, m: Message):
             await asyncio.sleep(0.5)
             try:
                 await m.click(0)
+                await asyncio.sleep(1)
             except Exception as e:
                 print("Click failed:", e)
                 refresh_music_data()
