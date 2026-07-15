@@ -11,3 +11,11 @@ class AfkState:
 
 
 AFK_DATA = AfkState()
+
+@dataclass
+class MusicState:
+    status: bool = False
+    user_chat_id:int | None = None
+    user_message_id:int | None = None 
+
+MUSIC_STATE = MusicState()
