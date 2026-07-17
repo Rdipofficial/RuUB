@@ -20,7 +20,7 @@ async def think(c: Client, m: Message):
     is_adv = args[0].lower() == "adv"
     query = " ".join(args[1:] if is_adv else args)
 
-    await m.reply("wait...")
+    zzz = await m.reply("wait...")
 
     ai = AiSearch(query)
 
@@ -49,3 +49,4 @@ async def think(c: Client, m: Message):
         result_id=results.results[0].id,
         reply_parameters=ReplyParameters(message_id=m.id)
     )
+    await zzz.delete()
