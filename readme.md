@@ -62,6 +62,11 @@ Set the following environment variables in your `.env` file:
 | `think <text>` / `think adv <text>` | AI-powered search |
 | `wiki <text>` | Search Wikipedia |
 | `afk <text>` | set user status to afk if replied to media it will send media |
+| `ban <uid> <uptil> <reason>`| bans a user uid is necessary if not replied to user |
+| `cban <uid> <uptil> <reason>`| same as ban but revokes users texts and reaction |
+| `dban <uid> <uptil> <reason>`| same as ban but deletes replied message |
+| `sban <uid> <uptil> <reason>`| same as ban but silently bans user |
+| `unban <uid>`| unbans a user if replied to targets message uid not required |
 
 ---
 
