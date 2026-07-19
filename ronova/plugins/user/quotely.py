@@ -42,4 +42,4 @@ async def quote(c:Client, m:Message):
             await c.send_message(QUOTLY_BOT, " ".join(m.command[1:]))
             quote_state(status=True, user_chat_id = m.chat.id, user_message_id = m.id)
         else:
-            m.edit("something went wrong")
+            await m.edit("usage: q <text> or q with replying to a message")
