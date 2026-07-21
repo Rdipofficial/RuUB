@@ -16,7 +16,9 @@ def get_logs(data:bool = False) -> str:
         empty = "📭"
         board = "📋"
     else:
-        cross, empty, board = "<tg-emoji emoji-id='5325888970368762082'>👅</tg-emoji>"
+        emoji = "<tg-emoji emoji-id='5325888970368762082'>👅</tg-emoji>"
+        cross, empty, board = emoji, emoji, emoji
+        
     if not os.path.exists("logs.txt"):
         return f"{cross} Log file not found."
     else:
