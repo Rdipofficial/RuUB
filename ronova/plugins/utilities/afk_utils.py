@@ -14,6 +14,8 @@ def refresh_data():
     AFK_DATA.afk_time = None
     AFK_DATA.file_id = None
     AFK_DATA.file_type = None
+    AFK_DATA.media_from_chat = None
+    AFK_DATA.message_media_id = None
     AFK_DATA.users.clear()
 
 
