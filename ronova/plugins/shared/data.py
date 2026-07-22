@@ -28,3 +28,10 @@ class QuoteState:
     user_message_id:int | None = None
 
 QUOTE_STATE =  QuoteState()
+
+@dataclass
+class PremiumState:
+    status: bool = False
+    text: str | None = None
+
+PREMIUM_STATE = PremiumState()
