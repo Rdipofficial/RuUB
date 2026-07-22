@@ -1,22 +1,18 @@
-import os
+API_ID = 21377358
+API_HASH = "e05bc1f4f03839db7864a99dbf72d1cd"
+BOT_TOKEN = "8838833097:AAHx1wlbF83yEcmPlb_izSjpVWnxx2wlmhE"
+BOT = "kimiassistbot"
+ADMIN_ID = [740397179]
+SESSION_STRING = """BQFGMU4AHaOFCNqzd-rYPQahTDZBBoCptdW75H3rInzpWibL8Sn3imMYiaE
+DBGjUUzXcTGewd3vrzMcTaxcAzov8hV_rCx4GfE6SB6dl3d46D75tZDCGlIsbVn8tiXLHkhSMq
+HFGTVPJwBCjrxIvr2oQ8Gos1cOBy-sc1JTKOz1Ck-6WL_-09GjllRt36zKhTfZsKEnm3IUICvY
+tZcvcqHv2wxnTnkxj5LPPR3h5diavEUsrgQGrASgPdcjkdpFdpPf9hEnC0knLkMSGix1rVM3HT
+QBURbriLZ25cOWGG0IOd1fvRugloWDo-BHMRe1lDC36w6aWUil5f2supqswHEURkRLR-gAAAAH
+-pi3FAA"""
+TAVILY_KEY = "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"
+TMDB_KEY = "y"
+GEMINI_KEY = "AQ.Ab8RN6IO37DBBKw9yYe14M89ozdlA2QPK-1OqOH_o9eVsFPWFg"
+GROQ_KEY = "xai-JfcfWHL9jsXQ8ZID8rADRK2ycstuRmH3m5l5H0OV7Q4Q853hRvzh67kImj6MiESM7n6JL5QqhrN54eUz"
+RENDER_API = "your_render_api_key_here"
 
-from dotenv import load_dotenv
-
-
-load_dotenv()
-
-
-API_ID: int = int(os.getenv('api_id'))
-API_HASH: str = os.getenv('api_hash')
-BOT_TOKEN: str = os.getenv('bot_token')
-BOT:str = os.getenv('bot')
-ADMIN_ID: list[int] = [int(os.getenv('admin'))]
-SESSION_STRING: str = os.getenv('string_session')
-TAVILY_KEY: str = os.getenv('tavily_key')
-TMDB_KEY:str = os.getenv('tmdb_key')
-GEMINI_KEY:str = os.getenv('gemini_key')
-GROQ_KEY:str = os.getenv('groq_key')
-RENDER_API = os.getenv('render_api')
-
-
-PREFIXES: list[str] = [".", "@", "#", "$", "%", "^", "&", "*", "~", ""]
+PREFIXES = [".", "@", "#", "$", "%", "^", "&", "*", "\~", ""]
