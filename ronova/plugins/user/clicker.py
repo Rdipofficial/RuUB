@@ -12,11 +12,4 @@ from config import ADMIN_ID
 async def prem_click(c: Client, m: Message):
 
     if PREMIUM_STATE.status:
-        button = m.reply_markup.inline_keyboard[0][0]
-
-        await c.request_callback_answer(
-            chat_id=m.chat.id,
-            message_id=m.id,
-            callback_data=button.callback_data
-        )
-    
+        await m.click("wait")

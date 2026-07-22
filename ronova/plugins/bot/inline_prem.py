@@ -15,17 +15,19 @@ from ..shared import PREMIUM_STATE
 from ..premium.emoji_allies import emojis
 
 def change_text(text: str):
-    import re
+    words = text.split()
 
-    def replace_word(match):
-        word = match.group(0)
-        return emojis.get(word.lower(), word)
+    result = []
 
-    text = re.sub(r"\b\w+\b", replace_word, text)
+    for word in words:
+        key = word.lower()
 
-    for e, tg in emojis.items():
-        text = text.replace(e, tg)
+        if key in emojis:
+            result.append(emojis[key])
+        else:
+            result.append(word)
 
+    text = " ".join(result)
     return text
 
 @Client.on_inline_query(filters.regex("prem (.+)") & filters.user(ADMIN_ID))
